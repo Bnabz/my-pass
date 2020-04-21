@@ -105,7 +105,7 @@ class TestCredentials(unittest.TestCase):
         found_credential_exists = Credentials.credential_exists('TestPlat')
         self.assertTrue(found_credential_exists)
     
-    def test_display_all_credentials(self):
+    def test_display_credentials(self):
        
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
