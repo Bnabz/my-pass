@@ -16,6 +16,9 @@ class TestUser(unittest.TestCase):
         self.new_user.save_user() #saving the new user_list
         self.assertEqual(len(User.user_list),1)
 
+    def tearDown(self):
+            User.user_list = []
+
 
 if __name__ == '__main__':
     unittest.main()
