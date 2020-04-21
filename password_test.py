@@ -108,10 +108,10 @@ class TestCredentials(unittest.TestCase):
        
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
-    #  def test_copy_credentials(cls,platform):
-    #     copied_credentials = Credentials.find_credentials('platform')
-    #     pyperclip.copy(copied_credentials)
-    #      self.assertEqual(self.new_user,pyperclip.paste())
+    def test_copy_credentials(cls,platform):
+        copied_credentials = Credentials.find_credentials('platform')
+        pyperclip.copy(copied_credentials)
+        self.assertEqual(self.new_user,pyperclip.paste())
 
 if __name__ == '__main__':
     unittest.main()
