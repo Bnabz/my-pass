@@ -67,8 +67,8 @@ def main():
 
         save_user(create_user(fname,lname,uname,pword))
         print('\n')
-        # print(f"Your account has been created successfully. To proceed, use the following short codes:")
-        # print('\n')
+        print(f"Your account has been created successfully. To proceed, use the following short codes:")
+        print('\n')
 
 
     
@@ -83,7 +83,7 @@ def main():
 
         
     while True:
-        print(" Use the following short codes:\n nc - Create a new credential \n dc - Display credentials \n fc - Find a credential \n del - Delete credential \n ex - Exit the application \n")
+        print(" Use the following short codes:\n nc - Create a new credential \n dc - Display credentials \n fc - Find a credential \n del - Delete credential \n cc - Copy credential \n ex - Exit the application \n")
         short_code = input( '_').lower().strip()
         if short_code == "nc":
             print(" Create New Credential")
@@ -111,28 +111,40 @@ def main():
                 print(" You haven't saved any credentials yet")
         elif short_code == "fc":
             print(" Enter the Platform Name you want to search for")
-            search_name = input( '_').lower()
+            search_name = input()
             if find_credential(search_name):
                 found_credential = find_credential(search_name)
                 print(f" Platform Name : {found_credential.platform}")
                 print(' -' * 20)
-                print(f" Username: {found_credential.username} Password :{found_credential.password}")
+                print(f" Username: {found_credential.username}, Password :{found_credential.password}")
                 print('\n')
             else:
                 print(" That Credential does not exist")
                 print('\n')
         elif short_code == "del":
-            print(" Enter the platform name of the Credentials you want to delete")
-            search_name = input( '_').lower()
+            print(" Enter the platform name of the credentials you want to delete")
+            search_name = input()
             if find_credential(search_name):
                 search_credential = find_credential(search_name)
                 print(" _"*20)
                 search_credential.delete_credentials()
                 print('\n')
-                print(f" Your stored credentials for : {search_credential.platform}\n has successfully deleted!")
+                print(f" Your stored credentials for : {search_credential.platform}\n have been deleted.")
                 print('\n')
             else:
                 print(" The credential you would like to delete does not exist")
+
+        elif short_code == 'cc':
+            print(" Enter the platform name of the credentials you want to copy")
+            search_name = input()
+            if find_credential(search_name):
+                copy_credentials(search_name)
+                print("Your credentials have been copied successfully")
+                print(" _"*20)
+
+            else:
+                print(" The credential you would like to copy does not exist")
+            
 
         elif short_code == 'ex':
             print(" Thanks for using My-Pass:) See you next time!")
