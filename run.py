@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.8
 import pyperclip
 from password import User
 from password import Credentials
@@ -58,12 +59,15 @@ def main():
         
         print("Enter Last Name:")
         lname = input()
+        print("-"*20)
 
         print("Enter Username:")
         uname = input()
+        print("-"*20)
 
-        print("Enter password")
+        print("Enter password:")
         pword = input()
+        print("-"*20)
 
         save_user(create_user(fname,lname,uname,pword))
         print('\n')
@@ -134,7 +138,7 @@ def main():
             else:
                 print(" The credential you would like to delete does not exist")
 
-        elif short_code == 'cc':
+        elif short_code == 'cc': #Proof of concept-ideally username, password should be copied seperately
             print(" Enter the platform name of the credentials you want to copy")
             search_name = input()
             if find_credential(search_name):
