@@ -35,9 +35,10 @@ class Credentials:
 
     credentials_list = []
 
-    def __init__(self,platform,password):
+    def __init__(self,platform,username,password):
         self.platform = platform
         self.password = password
+        self.username = username
     
     def save_credentials(self):
         Credentials.credentials_list.append(self)
@@ -70,8 +71,10 @@ class Credentials:
     
     @classmethod
     def copy_credentials(cls,platform):
-        copied_credentials = Credentials.find_credentials('platform')
+        copied_credentials = Credentials.find_credentials(platform)
         pyperclip.copy(copied_credentials)
+      
+
     
  
 
