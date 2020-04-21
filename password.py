@@ -65,10 +65,6 @@ class Credentials:
     def display_credentials(cls):
         return cls.credentials_list
     
-    # def new_password(stringLength = 10):
-    #     password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
-    #     return ''.join(random.choice(password) for i in range(stringLength))
-    
     @classmethod
     def copy_credentials(cls,platform):
         copied_credentials = Credentials.find_credentials(platform)
