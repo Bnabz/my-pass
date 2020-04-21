@@ -50,5 +50,63 @@ class TestUser(unittest.TestCase):
     def test_display_user_information(self):
         self.assertEqual(User.display_user_details(),User.user_list)
 
+
+
+class TestCredentials(unittest.TestCase):
+  
+    def setUp(self):
+      
+        self.new_credential = Credentials('Twitter','bnabz@gmail.com','mypass2')
+   
+    def test_init(self):
+        self.assertEqual(self.new_credential.platform,'Twitter')
+        self.assertEqual(self.new_credential.email,'bnabz@gmail.com')
+        self.assertEqual(self.new_credential.password,'mypass2')
+    
+    def test_save_credentials(self):
+        self.new_credential.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
+    
+    def tearDown(self):
+    
+        Credentials.credentials_list = []
+    
+
+    def test_save_multiple_credentials(self):
+       
+        self.new_credential.save_credentials()
+        test_credential = Credentials('Test','test.@gmail.com','testpass')
+        test_credential.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),2)
+    
+
+    def test_delete_credentials(self):
+        
+        self.new_credential.save_credentials()
+        test_credential = Credentials('Test','test.@gmail.com','testpass')
+        test_credential.save_credentials()
+        self.new_credential.delete_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
+    
+    def test_find_credentials(self):
+      
+        self.new_credential.save_credentials('Twitter','bnabz@gmail.com','mypass2')
+        test_credential = Credentials
+        test_credential.save_credentials()
+        found_credentials = Credentials.find_credentials('Twitter')
+        self.assertEqual(found_credentials.platform,test_credential.platform)
+    
+    def test_credential_exists(self):
+       
+        self.new_credential.save_credentials()
+        test_credential = Credentials('Twitter','bnabz@gmail.com','mypass2')
+        test_credential.save_credentials()
+        found_credential_exists = Credentials.credential_exists('Twitter')
+        self.assertTrue(found_credential_exists)
+    
+    def test_display_all_credentials(self):
+       
+        self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
+
 if __name__ == '__main__':
     unittest.main()
