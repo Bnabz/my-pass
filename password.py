@@ -72,7 +72,10 @@ class Credentials:
     @classmethod
     def copy_credentials(cls,platform):
         copied_credentials = Credentials.find_credentials(platform)
-        pyperclip.copy(copied_credentials)
+        copiedPlat = copied_credentials.platform
+        copiedName = copied_credentials.username
+        copiedPass = copied_credentials.password
+        pyperclip.copy('Platform:'+copiedPlat+', '+ 'Username: '+copiedName+', '+ 'Password: '+copiedPass)
       
 
     

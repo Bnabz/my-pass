@@ -57,11 +57,12 @@ class TestCredentials(unittest.TestCase):
   
     def setUp(self):
       
-        self.new_credential = Credentials('Twitter','mypass2')
+        self.new_credential = Credentials('TestPlat','tester','testpass')
    
     def test_init(self):
-        self.assertEqual(self.new_credential.platform,'Twitter')
-        self.assertEqual(self.new_credential.password,'mypass2')
+        self.assertEqual(self.new_credential.platform,'TestPlat')
+        self.assertEqual(self.new_credential.username,'tester')
+        self.assertEqual(self.new_credential.password,'testpass')
     
     def test_save_credentials(self):
         self.new_credential.save_credentials()
@@ -75,7 +76,7 @@ class TestCredentials(unittest.TestCase):
     def test_save_multiple_credentials(self):
        
         self.new_credential.save_credentials()
-        test_credential = Credentials('Test','testpass')
+        test_credential = Credentials('TestPlat','tester','testpass')
         test_credential.save_credentials()
         self.assertEqual(len(Credentials.credentials_list),2)
     
@@ -83,7 +84,7 @@ class TestCredentials(unittest.TestCase):
     def test_delete_credentials(self):
         
         self.new_credential.save_credentials()
-        test_credential = Credentials('Test','testpass')
+        test_credential = Credentials('TestPlat','tester','testpass')
         test_credential.save_credentials()
         self.new_credential.delete_credentials()
         self.assertEqual(len(Credentials.credentials_list),1)
@@ -91,27 +92,28 @@ class TestCredentials(unittest.TestCase):
     def test_find_credentials(self):
       
         self.new_credential.save_credentials()
-        test_credential = Credentials('Twitter','mypass2')
+        test_credential = Credentials('TestPlat','tester','testpass')
         test_credential.save_credentials()
-        found_credentials = Credentials.find_credentials('Twitter')
+        found_credentials = Credentials.find_credentials('TestPlat')
         self.assertEqual(found_credentials.platform,test_credential.platform)
     
     def test_credential_exists(self):
        
         self.new_credential.save_credentials()
-        test_credential = Credentials('Twitter','mypass2')
+        test_credential = Credentials('TestPlat','tester','testpass')
         test_credential.save_credentials()
-        found_credential_exists = Credentials.credential_exists('Twitter')
+        found_credential_exists = Credentials.credential_exists('TestPlat')
         self.assertTrue(found_credential_exists)
     
     def test_display_all_credentials(self):
        
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
-    def test_copy_credentials(cls,platform):
-        copied_credentials = Credentials.find_credentials('platform')
-        pyperclip.copy(copied_credentials)
-        self.assertEqual(self.new_user,pyperclip.paste())
+    def test_copy_credentials(self):
+        self.new_credential.save_credentials()
+        Credentials.copy_credentials('TestPlat')
+        test_copy = ('Platform:'+self.new_credential.platform+', '+ 'Username: '+self.new_credential.username+', '+ 'Password: '+self.new_credential.password)
+        self.assertEqual(test_copy,pyperclip.paste())
 
 if __name__ == '__main__':
     unittest.main()
